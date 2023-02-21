@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url(assets/background3.jpg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items:center;
+    height: 100vh;
+}
+
+body h1{
+    font-size: 4rem;
+    color:white;
+}
+
+.container{
+    background-color: rgba(128, 128, 128, 0.42);
+    width: 50rem;
+    height: 50rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.box{
+    box-shadow: 0 0 0 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 4rem;
+}
