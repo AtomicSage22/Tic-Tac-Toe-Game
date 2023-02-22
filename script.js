@@ -9,13 +9,35 @@ const gameBoard = (()=>{
             }
         }
     };
-    return {fillLayout, gameLayout};
+    return {fillLayout, gameLayout, magicSquare};
 })();
 
 const flowControl = (() => {
-    const checkWinner = (player) => {
-        
+    let playerXPoints = 0;
+    let playerOPoints = 0;
+    const checkWinner = (player, position) => {
+        if (player == "X"){
+            playerXPoints += gameBoard.magicSquare[position[0]][position[2]];
+            if (playerXPoints == 15){
+                return "X";
+            }
+        }
+        else if (player == "O"){
+            playerOPoints += gameBoard.magicSquare[position[0]][position[2]];
+            if (playerOPoints == 15){
+                return "O";
+            }
+        }
+
     };
+
+    const endGame = () =>{
+        gameBoard.gameLayout = [["","",""],["","",""],["","",""]];
+        playerOPoints = 0;
+        playerXPoints = 0;
+        gameBoard.fillLayout();
+    }
+    return {checkWinner, endGame};
 }
 )();
 
@@ -29,18 +51,29 @@ const displayControler = (() =>{
                 if(gameBoard.gameLayout[box.id[0]][box.id[2]] == ""){
                     gameBoard.gameLayout[box.id[0]][box.id[2]] = "X";
                 }
+                if (movesTotal == 9){ alert("It's a draw")}
+                else{
+                    if(flowControl.checkWinner(player, box.id) == "X"){
+                        alert("X has won!")
+                        flowControl.endGame();
+                    }}
                 player = "O";
             }
             else if(player == "O"){
                 if(gameBoard.gameLayout[box.id[0]][box.id[2]] == ""){
                     gameBoard.gameLayout[box.id[0]][box.id[2]] = "O";
                 }
+                if (movesTotal == 9){ alert("It's a draw")}
+                else{
+                    if(flowControl.checkWinner(player, box.id) == "O"){
+                        alert("O has won!")
+                        flowControl.endGame();
+                    }}
                 player = "X";
             }
             gameBoard.fillLayout();
-            // movesTotal++;
-            // movesTotal == 9? alert("It's a draw"): flowControl.checkWinner(player);
-        })
+            movesTotal++;
+        }, {once : true})
     })
     return {player};
 }
