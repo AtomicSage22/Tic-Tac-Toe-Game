@@ -28,7 +28,6 @@ const flowControl = (() => {
                 return "O";
             }
         }
-
     };
 
     const endGame = () =>{
@@ -45,30 +44,38 @@ const displayControler = (() =>{
     let player = "X";
     let movesTotal = 0;
     const boxes = document.querySelectorAll(".box");
+    const textBox = document.querySelector(".text-box");
+    textBox.textContent = "X's turn";
     boxes.forEach((box) => {
         box.addEventListener("click", () =>{
             if(player == "X"){
                 if(gameBoard.gameLayout[box.id[0]][box.id[2]] == ""){
                     gameBoard.gameLayout[box.id[0]][box.id[2]] = "X";
                 }
-                if (movesTotal == 9){ alert("It's a draw")}
-                else{
-                    if(flowControl.checkWinner(player, box.id) == "X"){
-                        alert("X has won!")
+                if (movesTotal == 9){ textBox.textContent = "It's a draw"}
+
+                else if(flowControl.checkWinner(player, box.id) == "X"){
+                        textBox.textContent = "X has won!";
                         flowControl.endGame();
-                    }}
+                    }
+                else{
+                    textBox.textContent = "O's turn";
+                }
+                
                 player = "O";
             }
             else if(player == "O"){
                 if(gameBoard.gameLayout[box.id[0]][box.id[2]] == ""){
                     gameBoard.gameLayout[box.id[0]][box.id[2]] = "O";
                 }
-                if (movesTotal == 9){ alert("It's a draw")}
-                else{
-                    if(flowControl.checkWinner(player, box.id) == "O"){
-                        alert("O has won!")
+                if (movesTotal == 9){ textBox.textContent= "It's a draw"}
+                else if(flowControl.checkWinner(player, box.id) == "O"){
+                        textBox.textContent = "O has won!"
                         flowControl.endGame();
-                    }}
+                    }
+                else{
+                    textBox.textContent = "X's turn";    
+                }
                 player = "X";
             }
             gameBoard.fillLayout();
@@ -78,3 +85,6 @@ const displayControler = (() =>{
     return {player};
 }
 )();
+
+const playerFactory = (playerName, playerCharacter) => {playerName, playerCharacter};
+

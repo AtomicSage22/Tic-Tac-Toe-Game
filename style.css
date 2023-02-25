@@ -11,11 +11,20 @@ body{
     justify-content:space-around;
     align-items:center;
     height: 100vh;
+    position: relative;
 }
 
 body h1{
     font-size: 4rem;
     color:white;
+}
+
+.text-box{
+    width: 20rem;
+    height: 2rem;
+    color: aliceblue;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .container{
